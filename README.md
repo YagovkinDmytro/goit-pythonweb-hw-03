@@ -44,6 +44,8 @@ python main.py
 The server will start on http://localhost:3000.
 
 Folder Structure
+
+```
 ├── main.py
 ├── index.html
 ├── message.html
@@ -52,3 +54,4 @@ Folder Structure
 ├── logo.png
 └── storage/
 └── data.json
+```
