@@ -29,29 +29,21 @@ Submitted messages are saved with a timestamp as the key:
     "message": "Hello, world!"
   }
 }
+```
+
 Getting Started
 Prerequisites
 Python 3.10+
-
 Jinja2
 
 Install dependencies:
-
-bash
-Копировать
-Редактировать
 pip install Jinja2
+
 Run the Server
-bash
-Копировать
-Редактировать
 python main.py
 The server will start on http://localhost:3000.
 
 Folder Structure
-pgsql
-Копировать
-Редактировать
 ├── main.py
 ├── index.html
 ├── message.html
@@ -59,5 +51,4 @@ pgsql
 ├── style.css
 ├── logo.png
 └── storage/
-    └── data.json
-```
+└── data.json
