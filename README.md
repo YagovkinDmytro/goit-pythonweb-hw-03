@@ -53,5 +53,5 @@ Folder Structure
 ├── style.css
 ├── logo.png
 └── storage/
-└── data.json
+    └── data.json
 ```
