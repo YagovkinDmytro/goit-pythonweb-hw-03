@@ -39,10 +39,14 @@
           </div>
         </div>
       </nav>
-
-      <div class="p-3 pb-md-4 mx-auto text-center">
-        <h1 class="display-4 fw-normal">404</h1>
-        <p class="fs-5 text-muted">Not Found</p>
+      <div class="p-3 pb-md-4 mx-auto">
+        <ul class="list-group">
+          {% for person in persons -%}
+          <li class="list-group-item">
+            {{ person.username }}: {{ person.message }}
+          </li>
+          {% endfor %}
+        </ul>
       </div>
     </header>
   </body>
