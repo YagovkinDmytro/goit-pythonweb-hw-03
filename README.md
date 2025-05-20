@@ -46,12 +46,19 @@ The server will start on http://localhost:3000.
 Folder Structure
 
 ```
+project_root/
 ├── main.py
-├── index.html
-├── message.html
-├── persons.html
-├── style.css
-├── logo.png
-└── storage/
-    └── data.json
+├── storage/
+│   └── data.json
+├── templates/
+│   ├── index.html
+│   ├── message.html
+│   ├── persons.html
+│   └── error.html
+├── static/
+│   ├── css/
+│   │   └── style.css
+│   └── img/
+│       └── logo.png
+├── README.md
 ```

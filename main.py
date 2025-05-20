@@ -7,16 +7,18 @@ import json
 from jinja2 import Environment, FileSystemLoader
 
 
+TEMPLATES_DIR = 'templates'
+DATA_FILE = 'storage/data.json'
 class HttpHandler(BaseHTTPRequestHandler):
     def do_GET(self):
         pr_url = urllib.parse.urlparse(self.path)
         if pr_url.path == '/':
-            self.send_html_file('index.html')
+            self.send_html_file(f'{TEMPLATES_DIR}/index.html')
         elif pr_url.path == '/message':
-            self.send_html_file('message.html')
+            self.send_html_file(f'{TEMPLATES_DIR}/message.html')
         elif pr_url.path == '/read':
             html = self.get_person_html()
-            self.send_html_content(html) 
+            self.send_html_content(html)
         else:
             if Path().joinpath(pr_url.path[1:]).exists():
                 self.send_static()
@@ -28,7 +30,7 @@ class HttpHandler(BaseHTTPRequestHandler):
         data_parse = urllib.parse.unquote_plus(data.decode())
         data_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f')
         data_info ={data_time: {key: value for key, value in [el.split('=') for el in data_parse.split('&')]}}
-        self.save_to_json(data_info, "storage/data.json")
+        self.save_to_json(data_info, f'{DATA_FILE}')
         self.send_response(302)
         self.send_header('Location', '/')
         self.end_headers()
@@ -75,7 +77,7 @@ class HttpHandler(BaseHTTPRequestHandler):
             json.dump(data, f, indent=4, ensure_ascii=False)
 
     def get_person_html(self):
-        data_path = Path("storage/data.json")
+        data_path = Path(f'{DATA_FILE}')
         data_path.parent.mkdir(parents=True, exist_ok=True)
         data = {}
     
@@ -86,12 +88,11 @@ class HttpHandler(BaseHTTPRequestHandler):
             except json.JSONDecodeError:
                 pass
         
-        env = Environment(loader=FileSystemLoader('.'))
+        env = Environment(loader=FileSystemLoader(f'{TEMPLATES_DIR}'))
         template = env.get_template("persons.html")
         output = template.render(persons=data.values())
         return output
         
-
 
 def run(server_class=HTTPServer, handler_class=HttpHandler):
     server_addres = ('', 3000)
